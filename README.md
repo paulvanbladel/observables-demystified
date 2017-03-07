@@ -139,4 +139,67 @@ source.subscribe(
   () => console.log('complete'));
 ```
 
+## track mouse moves via an observable
+```
+import { Observable, Observer } from 'rxjs';
 
+let circle = document.getElementById('circle');
+
+
+let source = Observable.fromEvent(document, 'mousemove')
+  .map((e: MouseEvent) => {
+    return {
+      x: e.clientX,
+      y: e.clientY
+    };
+  }).filter(v => v.x < 500);
+
+
+source.subscribe(
+  v => console.log(v),
+  e => console.log(e),
+  () => console.log('complete'));
+
+```
+
+## handling an XMLHttpRequest via observables using 
+```
+import { Observable, Observer } from 'rxjs';
+
+const output = document.getElementById('output');
+const button = document.getElementById('button');
+
+const click = Observable.fromEvent(button, 'click');
+
+
+function load(url: string) {
+  return Observable.create(observer => {
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', () => {
+      const data = JSON.parse(xhr.responseText);
+      observer.next(data);
+      observer.complete();
+    });
+    xhr.open('GET', url);
+    xhr.send();
+  });
+}
+
+
+function renderMovies(movies) {
+  console.log('movies received by subscriber ' + JSON.stringify(movies));
+  movies.forEach(m => {
+    const div = document.createElement('div');
+    div.innerText = m.title;
+    output.appendChild(div);
+  });
+}
+
+click.flatMap(e => load('movies.json')).subscribe(
+  renderMovies,
+  e => console.log(e),
+  () => console.log('complete')
+);
+```
+
+## promises
