@@ -1,0 +1,29 @@
+{
+  "name": "observables-demystified",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "start": "webpack-dev-server --watch --inline",
+    "postinstall": "typings install"
+  },
+  "devDependencies": {
+    "ts-loader": "^2.0.1",
+    "tslint": "^4.5.1",
+    "typescript": "^2.2.1",
+    "typings": "^2.1.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulvanbladel/observables-demystified.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paulvanbladel/observables-demystified.git/issues"
+  },
+  "homepage": "https://github.com/paulvanbladel/observables-demystified.git#readme"
+}
